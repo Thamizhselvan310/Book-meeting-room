@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>userhome</title>
+</head>
+<body onload="loadDoc()">
+    <div id="content">
+
+    </div>
+</body>
+<script>
+function loadDoc() {
+
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        var data1=JSON.parse(this.responseText)
+        data1.forEach(function(data) {
+            document.getElementById("content").innerHTML +="<ul><li>"+ "Company: " + data.company_name+"</li><li>"+"Start time: "+data.start_time+"</li><li>"+"End time: "+data.end_time+"</li><li>"+"Date: "+data.date+"</li><li>"+"Purpose: "+data.reason+"</ul>"
+        });
+    }
+  };  
+  xhttp.open("GET", "http://localhost:3000/getbook", true);
+  xhttp.send();
+}
+</script>
+</html>

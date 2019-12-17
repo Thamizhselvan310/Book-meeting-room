@@ -1,0 +1,87 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Company login</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" class="" />
+  <link href="https://fonts.googleapis.com/css?family=Courgette&display=swap" rel="stylesheet" />
+</head>
+<style>
+  .block {
+    display: block;
+    width: 100%;
+    border: none;
+    background-color: brown;
+    color: white;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 12px;
+  }
+
+  .block:hover {
+    background-color: #ddd;
+    color: black;
+  }
+
+  body {
+    /* background-image: url("/Venkat/hackthon1-master/sam1.jpg"); */
+    background-position: 75px;
+  }
+</style>
+
+<body>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-4"><br><br><br>
+        <form onsubmit="verify(); return false">
+          <div class="form-group">
+            <label for="exampleInputName">Company Name</label>
+            <input type="text" class="form-control" id="exampleInputName" name="exampleInputName"
+              placeholder="Enter  your name" />
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder=" Enter your Password" />
+          </div>
+          <br>
+          <input type="submit" class="block">
+        </form>
+      </div>
+    </div>
+  </div>
+  </div>
+  <script>
+    function verify() {
+      var enterdata = {
+        company_name: document.getElementById("exampleInputName").value,
+        password: document.getElementById("exampleInputPassword1").value
+      }
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          var data1 = this.responseText
+          if(data1 == "true"){
+            window.location="./form.html"
+          }
+          else{
+            alert("invalid")
+          }
+
+        }
+      }
+      xhttp.open("POST", "http://localhost:3000/getlogin", true)
+      xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      xhttp.send(JSON.stringify(enterdata));
+    }
+
+
+  </script>
+</body>
+
+</html>
